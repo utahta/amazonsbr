@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="{{ url_for('.static', filename='css/screen.css') }}" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="{{ url_for('.static', filename='css/print.css') }}" type="text/css" media="print">
+<!--[if IE]>
+  <link rel="stylesheet" href="{{ url_for('.static', filename='css/ie.css') }}" type="text/css" media="screen, projection">
+<![endif]-->
+<link rel="stylesheet" href="{{ url_for('.static', filename='css/style.css') }}" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="{{ url_for('.static', filename='colorbox/colorbox.css') }}" media="screen"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="{{ url_for('.static', filename='colorbox/jquery.colorbox-min.js') }}"></script>
+<script src="{{ url_for('.static', filename='js/main.js') }}"></script>
+<title>{% block title %}Amazon Social Book Ranking{% endblock %}</title>
+</head>
+<body>
+
+<div class="container">
+    <div class='span-24 header'>
+        <h1 class="fancy"><a href='{{ url_for("top.index") }}'>Amazon Social Book Ranking</a></h1>
+    </div>
+</div>
+
+{% block contents %}{% endblock %}
+
+<div class="container">
+    <div class="span-24 footer">
+    <a class='about' href='{{ url_for("top.about") }}'>このサイトについて</a> | © 2011 ninxit.com. Created by <a href='http://twitter.com/utahta' target=_blank>@utahta</a>
+    </div>
+</div>
+</body>
+</html>

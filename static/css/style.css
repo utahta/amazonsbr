@@ -1,0 +1,157 @@
+/*************************************
+   WELCOME TO THE CUSTOM STYLESHEET
+--------------------------------------
+              style.css
+        BlueTrip CSS Framework
+    Put your custom styles in here.
+***************************************/
+
+/**************************************/
+/*           COLOR SCHEME             */
+/**************************************
+- black		#000
+- white		#fff
+-           #176481
+-           #B64F2C
+-           #6D6D6D
+-           #AAA
+-           #F3F3F3
+***************************************/
+
+
+/**************************************/
+/*              GLOBALS               */
+/**************************************/
+
+
+/**************************************/
+/*              HEADER                */
+/**************************************/
+.header{
+	border-bottom: 1px solid #eee;
+	margin-bottom: 15px;
+}
+.header h1 a{
+    color: #176481;
+    text-decoration: none;
+}
+
+/**************************************/
+/*             NAVIGATION             */
+/**************************************/
+
+
+
+/**************************************/
+/*            MAIN CONTENT            */
+/**************************************/
+.box{}
+.box .header{
+	border: 0;
+	margin: 0;
+	padding-left: 10px;
+}
+.box .header a{
+    color: #6D6D6D;
+    font-weight: bold;
+	text-decoration: none;
+}
+.box .header a:hover{
+    text-decoration: underline;
+}
+
+.box .content{
+    padding: 0px 10px 10px 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.box .content img{
+    border: 1px solid #eee;
+}
+
+/* Ranking page */
+.ranking{
+	margin-bottom: 24px;
+}
+.ranking .rankno{
+    color: #999;
+	font-size: 24px;
+}
+
+.ranking .title{
+	margin-bottom: 5px;
+}
+.ranking .title a{
+    color: #6D6D6D;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.ranking .title a:hover{
+	color: #B64F2C;
+}
+
+.ranking .info{
+    color: #999;
+    margin-bottom: 5px;
+}
+.ranking .info .fmtprice{
+	color: #B64F2C;
+    font-size: 12px;
+}
+.ranking .info .author{
+    font-size: 11px;
+}
+.ranking .info .publicationdate{
+    font-size: 11px;
+}
+.ranking .info .pages{
+    font-size: 11px;
+}
+.ranking .info .publisher{
+    font-size: 11px;
+}
+
+.ranking .sbm{
+}
+
+/* Navigation */
+ul.nav{
+	list-style: none;
+}
+ul.nav li{
+    float: left;
+    padding: 3px;
+    margin-right: 3px;
+    border: 1px solid #F3F3F3;
+}
+ul.nav li a{
+    color: #176481;
+	text-decoration: none;
+}
+ul.nav li a:link{
+    color: #176481;
+}
+ul.nav li a:visited{
+	color: #176481;
+}
+ul.nav .select{
+	font-weight: bold;
+}
+
+/* about */
+.about {}
+
+.about .label{
+    color: #B64F2C;
+}
+
+/**************************************/
+/*               FOOTER               */
+/**************************************/
+.footer{
+	margin-top: 15px;
+	border-top: 1px solid #eee;
+	color: #AAA;
+}

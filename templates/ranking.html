@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ ranking.get_entry_title() }} - Amazon Social Book Ranking{% endblock %}
+
+{% macro page_navigation() %}
+    <ul class="nav clearfix">
+        {% if nav.start_flag %}
+            <li><a href="{{ url_for('ranking.index', id=ranking.get_entry_id(), page=1) }}">1...</a></li>
+        {% endif %}
+        {% for page in nav.list_pages %}
+            {% if page == nav.page %}
+                <li class="select"><a href="{{ url_for('ranking.index', id=ranking.get_entry_id(), page=page) }}">{{ page }}</a></li>
+            {% else %}
+                <li><a href="{{ url_for('ranking.index', id=ranking.get_entry_id(), page=page) }}">{{ page }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if nav.end_flag %}
+            <li><a href="{{ url_for('ranking.index', id=ranking.get_entry_id(), page=nav.max_page) }}">...{{ nav.max_page }}</a></li>
+        {% endif %}
+    </ul>
+{% endmacro %}
+
+{% block contents %}
+<div class="container">
+    <div class="prefix-1 span-23">{{ page_navigation() }}</div>
+{% for entry in ranking.get_entries() %}
+    <div class='prefix-1 span-23 ranking'>
+        <div class="span-1 fancy rankno">{{ entry.rank }}</div>
+        <div class="span-4"><a href="{{ entry.url }}" target=_blank><img src='{{ entry.img }}'></a></div>
+        <div class="span-18 last">
+            <div class="title thin"><a href="{{ entry.url }}" target=_blank>{{ entry.title }}</a></div>
+            <div class="info">
+                <div class="author">著者：{{ entry.author }}</div>
+                <div class="publisher">出版元：{{ entry.publisher }}</div>
+                <div class="publicationdate">発売日：{{ entry.publicationdate }}</div>
+                <div class="pages">ページ数：{{ entry.pages }}</div>
+                <div class="fmtprice">{{ entry.fmtprice }}</div>
+            </div>
+            <div class="sbm">
+                <a href="http://b.hatena.ne.jp/entry/{{ entry.baseurl }}" class="hatena-bookmark-button" data-hatena-bookmark-title="{{ entry.title }}" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+	            <a href="http://twitter.com/share" class="twitter-share-button" data-url="{{ entry.baseurl }}" data-text="{{ entry.title }}" data-count="horizontal" data-lang="ja">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+                <iframe src="http://www.facebook.com/plugins/like.php?locale=ja_JP&amp;href={{ entry.baseurl }}&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:120px; height:21px;" allowTransparency="true"></iframe>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+    <div class="prefix-1 span-23">{{ page_navigation() }}</div>
+</div>
+{% endblock %}

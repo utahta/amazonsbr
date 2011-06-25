@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block contents %}
+<div class="container">
+    {% for entries in entry.get_entries() %}
+        <div class='entry'>
+        {% for e in entries %}
+            {% if e == entries[-1] %}
+                {% set last = ' last' %}
+            {% else %}
+                {% set last = '' %}
+            {% endif %}
+            <div class='box prefix-1 span-4{{ last }}'>
+                <div class='thin header'>
+                    <a href='{{ url_for("ranking.index", id=e.id) }}'>{{ e.title }}</a>
+                </div>
+                <div class='content'>
+                    <a href='{{ url_for("ranking.index", id=e.id) }}'><img src="{{ e.img }}"></a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,4 @@
+Flask
+MySQL-python
+SQLAlchemy
+lxml
