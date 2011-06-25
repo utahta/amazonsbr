@@ -20,4 +20,4 @@ from sqlalchemy.orm.session import sessionmaker
 from sqlalchemy.orm import scoped_session
 
 master_engine = create_engine(dbconfig['master'])
-master_session = scoped_session(sessionmaker(bind=master_engine, autocommit=False, autoflush=False))
+master_session = scoped_session(sessionmaker(bind=master_engine))
