@@ -24,7 +24,12 @@ from model.bookranking import BookRankingUpdater
 from model.bookentry import BookEntryUpdater
 from model.updatesys import UpdateSys
 import sys
+import codecs
 from lxml import objectify
+
+# for cron
+sys.stdout = codecs.lookup('utf_8')[-1](sys.stdout)
+sys.stderr = codecs.lookup('utf_8')[-1](sys.stderr)
 
 class AmazonItem(object):
     def __init__(self, item, keywords):
