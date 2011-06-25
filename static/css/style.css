@@ -152,6 +152,8 @@ ul.nav .select{
 /**************************************/
 .footer{
 	margin-top: 15px;
+	padding-top: 5px;
 	border-top: 1px solid #eee;
+	vertical-align: bottom;
 	color: #AAA;
 }
