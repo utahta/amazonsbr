@@ -15,16 +15,23 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 from flask import Flask
-from config import appconfig
+from config import DEBUG_MODE, RUN_HOST
 from controller.top import topapp
 from controller.ranking import rankapp
+from db import session_remove
 
 app = Flask(__name__)
-app.debug = appconfig['debug']
+app.debug = DEBUG_MODE
+app.config.from_pyfile('config.py')
 app.register_module(topapp)
 app.register_module(rankapp, url_prefix='/ranking')
 
+@app.after_request
+def shutdown_session(response):
+    session_remove()
+    return response
+
 if __name__ == '__main__':
-    app.run(appconfig['host'])
+    app.run(RUN_HOST)
     
 application = app

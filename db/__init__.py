@@ -15,9 +15,12 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 from sqlalchemy.engine import create_engine
-from config import dbconfig
 from sqlalchemy.orm.session import sessionmaker
 from sqlalchemy.orm import scoped_session
+from config import DB_MASTER
 
-master_engine = create_engine(dbconfig['master'])
+master_engine = create_engine(DB_MASTER)
 master_session = scoped_session(sessionmaker(bind=master_engine))
+
+def session_remove():
+    master_session.remove()

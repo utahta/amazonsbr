@@ -1,4 +1,5 @@
 import bottlenose
-from config import amazonconfig
+from config import AMAZON_ACCESS_KEY, AMAZON_SECRET_KEY, AMAZON_TAG,\
+    AMAZON_REGION
 
-amazon = bottlenose.Amazon(amazonconfig['access_key'], amazonconfig['secret_key'], amazonconfig['tag'], Region=amazonconfig['region'])
+amazon = bottlenose.Amazon(AMAZON_ACCESS_KEY, AMAZON_SECRET_KEY, AMAZON_TAG, Region=AMAZON_REGION)

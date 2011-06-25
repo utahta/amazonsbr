@@ -15,18 +15,18 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-amazonconfig = {
-    'access_key': '',
-    'secret_key': '',
-    'tag': '',
-    'region': 'JP',
-}
+# Amazon
+AMAZON_ACCESS_KEY = ''
+AMAZON_SECRET_KEY = ''
+AMAZON_TAG = ''
+AMAZON_REGION = 'JP'
 
-dbconfig = {
-    'master': 'mysql://user:passwd@localhost:3306/dbname?charset=utf8'
-}
+# Database
+DB_MASTER = 'mysql://user:passwd@localhost:3306/dbname?charset=utf8'
 
-appconfig = {
-    'host': '127.0.0.1',
-    'debug': True,
-}
+# Google Analytics
+GA_CODE = ''
+
+# Common
+RUN_HOST = '127.0.0.1'
+DEBUG_MODE = True

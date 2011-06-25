@@ -43,12 +43,13 @@ class BookRanking(object):
             page = 0
         offset = page * limit
         print page, offset, limit
-        self._entries = master_session.query(self._klass).filter_by(entry_id=entry_id).limit(limit).offset(offset)
+        s = master_session()
+        self._entries = s.query(self._klass).filter_by(entry_id=entry_id).limit(limit).offset(offset)
         self._entry_id = entry_id
-        self._total_num = master_session.query(self._klass).filter_by(entry_id=entry_id).count()
+        self._total_num = s.query(self._klass).filter_by(entry_id=entry_id).count()
         self._page = page
         self._limit = limit
-        self._book_entry = master_session.query(BookEntryTable).filter_by(id=entry_id).one()
+        self._book_entry = s.query(BookEntryTable).filter_by(id=entry_id).one()
     
     def get_entries(self):
         return self._entries
@@ -76,8 +77,10 @@ class BookRankingUpdater(object):
         self._klass = rankclass
     
     def add(self, entry_id, rank, **kwargs):
-        master_session.add(self._klass(entry_id, rank, **kwargs))
-        master_session.commit()
+        s = master_session()
+        s.add(self._klass(entry_id, rank, **kwargs))
+        s.commit()
 
     def truncate(self):
-        master_session.execute("TRUNCATE %s" % self._klass.__tablename__)
+        s = master_session()
+        s.execute("TRUNCATE %s" % self._klass.__tablename__)

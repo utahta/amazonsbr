@@ -34,6 +34,6 @@ create_master_tables(BookRankingTable1.__table__)
 
 # Insert default row
 t = UpdateSysTable()
-master_session.add(t)
-
-master_session.commit()
+s = master_session()
+s.add(t)
+s.commit()

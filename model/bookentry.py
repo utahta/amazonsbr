@@ -29,7 +29,7 @@ class BookEntry(object):
     def get_entries(self):
         MAX_SIZE = 4
         data = []
-        length = math.ceil(len(self._data)/float(MAX_SIZE))
+        length = int(math.ceil(len(self._data)/float(MAX_SIZE)))
         for i in xrange(length):
             before = i*MAX_SIZE
             after = i*MAX_SIZE + MAX_SIZE
@@ -37,32 +37,38 @@ class BookEntry(object):
         return data
         
     def get_all(self):
-        return master_session.query(BookEntryTable).order_by(BookEntryTable.id).all()
+        s = master_session()
+        return s.query(BookEntryTable).order_by(BookEntryTable.id).all()
     
 class BookEntryUpdater(object):
     
     @staticmethod
     def add(title, img, term, searchindex, node):
         b = BookEntryTable(title, img, term, searchindex, node)
-        master_session.add(b)
-        master_session.commit()
+        s = master_session()
+        s.add(b)
+        s.commit()
         return b.id
     
     @staticmethod
     def update(id, img):
         b = BookEntryUpdater.get_one(id)
         b.img = img
-        master_session.add(b)
-        master_session.commit()
+        s = master_session()
+        s.add(b)
+        s.commit()
         
     @staticmethod
     def get_all():
-        return master_session.query(BookEntryTable).order_by(BookEntryTable.id).all()
+        s = master_session()
+        return s.query(BookEntryTable).order_by(BookEntryTable.id).all()
     
     @staticmethod
     def get_one(id):
-        return master_session.query(BookEntryTable).filter_by(id=id).one()
+        s = master_session()
+        return s.query(BookEntryTable).filter_by(id=id).one()
 
     @staticmethod
     def truncate():
-        master_session.execute("TRUNCATE %s" % BookEntryTable.__tablename__)
+        s = master_session()
+        s.execute("TRUNCATE %s" % BookEntryTable.__tablename__)

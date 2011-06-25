@@ -19,7 +19,8 @@ from db.updatesys import UpdateSysTable
 
 class UpdateSys(object):
     def __init__(self):
-        o = master_session.query(UpdateSysTable).one()
+        s = master_session()
+        o = s.query(UpdateSysTable).one()
         self.rankno = o.rankno
         self.available = o.available
     
@@ -30,12 +31,14 @@ class UpdateSys(object):
         return 1 - self.rankno
     
     def run_update(self):
-        num_rows = master_session.query(UpdateSysTable).filter_by(id=1, available=1).update({'available':0})
-        master_session.commit()
+        s = master_session()
+        num_rows = s.query(UpdateSysTable).filter_by(id=1, available=1).update({'available':0})
+        s.commit()
         return num_rows > 0
     
     def updated(self):
         rankno = self.get_update_rankno()
-        num_rows = master_session.query(UpdateSysTable).filter_by(id=1, available=0).update({'rankno':rankno, 'available':1})
-        master_session.commit()
+        s = master_session()
+        num_rows = s.query(UpdateSysTable).filter_by(id=1, available=0).update({'rankno':rankno, 'available':1})
+        s.commit()
         return num_rows > 0
