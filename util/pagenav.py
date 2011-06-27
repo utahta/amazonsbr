@@ -31,11 +31,10 @@ class PageNav(object):
             return "<prev:%s next:%s page:%s max:%s list:%s start:%s end:%s>" % (
                     self.prev_page, self.next_page, self.page, self.max_page, self.list_pages, self.start_flag, self.end_flag)
     
-    def __init__(self, total_num, limit, page, width=10):
+    def __init__(self, total_num, limit, radius=10):
         """
         total_num:
         limit: 
-        page: 1 - N
         """
         total_num = int(total_num)
         if total_num <= 0:
@@ -43,18 +42,20 @@ class PageNav(object):
         limit = int(limit)
         if limit <= 0:
             raise Exception("Invalid arguments. limit >= 1. limit:%s" % limit)
-        if page <= 0:
-            raise Exception("Invalid arguments. page >= 1. page:%s" % page)
         self._total_num = total_num
         self._limit = limit
-        self._page = page
         self._max_page = int(math.ceil(total_num / limit))
-        self._width = width
+        self._radius = radius
     
-    def create(self):
-        page = self._page
+    def get(self, page):
+        """
+        page: 1 - N
+        """
+        page = int(page)
+        if page <= 0:
+            raise Exception("Invalid arguments. page >= 1. page:%s" % page)
         max_page = self._max_page
-        width = self._width
+        radius = self._radius
         start_flag = False
         end_flag = False
         
@@ -68,53 +69,45 @@ class PageNav(object):
             next_page = max_page
         
         list_pages = []
-        if max_page < width:
+        if max_page < radius:
             for i in xrange(page, max_page+1):
                 list_pages.append(i)
         else:
-            if (page+width) > max_page:
-                start_res = page + width - max_page
+            if (page+radius) > max_page:
+                start_res = page + radius - max_page
             else:
                 start_res = 0
-            if (page-width) < 0:
-                end_res = width - page
+            if (page-radius) < 0:
+                end_res = radius - page
             else:
                 end_res = 0
             
-            if (page - width) <= 2:
+            if (page - radius) <= 2:
                 start_page = 1
             else:
                 start_flag = True
-                if (page - width - start_res) > 0:
-                    start_page = page - width - start_res
+                if (page - radius - start_res) > 0:
+                    start_page = page - radius - start_res
                 else:
-                    start_page = page - width
+                    start_page = page - radius
                     
-            if (page + width) >= (max_page-1):
+            if (page + radius) >= (max_page-1):
                 end_page = max_page
             else:
                 end_flag = True
-                if (page + width + end_res) < max_page:
-                    end_page = page + width + end_res
+                if (page + radius + end_res) < max_page:
+                    end_page = page + radius + end_res
                 else:
-                    end_page = page + width
+                    end_page = page + radius
             
             for i in xrange(start_page, end_page+1):
                 list_pages.append(i)
         return PageNav.Link(prev_page, next_page, page, max_page, list_pages, start_flag, end_flag)
 
 if __name__ == "__main__":
-    total_num = 123
-    width = 3
-    print PageNav(total_num, 10, 1, width).create()
-    print PageNav(total_num, 10, 2, width).create()
-    print PageNav(total_num, 10, 3, width).create()
-    print PageNav(total_num, 10, 4, width).create()
-    print PageNav(total_num, 10, 5, width).create()
-    print PageNav(total_num, 10, 6, width).create()
-    print PageNav(total_num, 10, 7, width).create()
-    print PageNav(total_num, 10, 8, width).create()
-    print PageNav(total_num, 10, 9, width).create()
-    print PageNav(total_num, 10, 10, width).create()
-    print PageNav(total_num, 10, 11, width).create()
+    total_num = 201
+    radius = 3
+    p = PageNav(total_num, 10, radius)
+    for i in xrange(1, 13):
+        print p.get(i)
     

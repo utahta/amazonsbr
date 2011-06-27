@@ -24,8 +24,8 @@ rankapp = Module(__name__)
 def index(id):
     page = int(request.values.get('page', 1))
     limit = 10
-    width = 3
+    radius = 3
     ranking = BookRanking()
     ranking.load_entries(id, page, limit)
-    nav = PageNav(ranking.get_total_num(), limit, page, width).create()
+    nav = PageNav(ranking.get_total_num(), limit, radius).get(page)
     return render_template('ranking.html', ranking=ranking, nav=nav)
